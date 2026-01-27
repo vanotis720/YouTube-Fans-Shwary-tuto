@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GatewayController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,3 +18,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('home');
 })->name('home');
+
+Route::post('/deposit', [GatewayController::class, 'deposit'])->name('deposit');
+Route::post('/deposit/callback', [GatewayController::class, 'callbackHandler'])->name('deposit.callback');
+
+Route::get('/deposit/{id}/success', function () {
+    return view('success');
+})->name('deposit.success');
+
+Route::get('/deposit/{id}/pending', function () {
+    return view('pending');
+})->name('deposit.pending');
+

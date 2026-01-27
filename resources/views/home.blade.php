@@ -79,22 +79,25 @@
                 </p>
 
                 @if (session('error'))
-                    <div id="status-banner"
-                        class="mt-6 hidden rounded-2xl bg-accent-200 border border-white/10 px-5 py-4 text-sm text-red-500 shadow-inner shadow-black/20">
+                    <div role="alert"
+                        class="mt-6 rounded-2xl bg-accent-200 border border-white/10 px-5 py-4 text-sm text-red-500 shadow-inner shadow-black/20">
+                        {{ session('error') }}
                     </div>
                 @endif
                 @if (session('message'))
-                    <div id="status-banner"
-                        class="mt-6 hidden rounded-2xl bg-green-200 border border-white/10 px-5 py-4 text-sm text-green-500 shadow-inner shadow-black/20">
+                    <div role="alert"
+                        class="mt-6 rounded-2xl bg-green-200 border border-white/10 px-5 py-4 text-sm text-green-500 shadow-inner shadow-black/20">
+                        {{ session('message') }}
                     </div>
                 @endif
 
-                <form id="gift-form" method="POST" action="#" class="mt-8 space-y-6">
+                <form id="gift-form" method="POST" action="{{ route('deposit') }}" class="mt-8 space-y-6">
+                    @csrf
                     <label class="flex flex-col gap-2 text-sm">
                         <span class="uppercase tracking-[0.2em] text-amber-100">Montant</span>
                         <div class="flex items-center gap-2 rounded-2xl border border-white/20 bg-white/10 px-4 py-3">
                             <span class="text-slate-300">CDF</span>
-                            <input id="gift-amount" name="amount" type="number" min="10000" step="1000"
+                            <input id="gift-amount" name="amount" type="number" min="1000" step="1000"
                                 value="22000"
                                 class="w-full bg-transparent text-white placeholder-slate-400 focus:outline-none"
                                 placeholder="22000">
@@ -115,7 +118,7 @@
                                 <option value="KE" data-dial="+254" data-currency="KES">+254 · KES (Kenya)</option>
                                 <option value="UG" data-dial="+256" data-currency="UGX">+256 · UGX (Ouganda)</option>
                             </select>
-                            <input id="mobile-number" type="tel"
+                            <input id="mobile-number" type="tel" name="phone_number"
                                 class="w-full rounded-2xl border border-white/20 bg-white/10 px-4 py-3 text-white placeholder-slate-400 focus:outline-none"
                                 placeholder="812 345 678">
                         </div>
