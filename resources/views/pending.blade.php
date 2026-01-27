@@ -1,31 +1,5 @@
-<!DOCTYPE html>
-<html lang="fr">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Confirmez votre Cadeau</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Space+Grotesk:wght@400;500;600&display=swap"
-        rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        body {
-            font-family: 'Space Grotesk', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-            background: radial-gradient(circle at 10% -10%, rgba(255, 182, 92, 0.45), transparent 40%),
-                radial-gradient(circle at 80% 10%, rgba(248, 113, 113, 0.25), transparent 40%),
-                #020617;
-        }
-
-        .title-font {
-            font-family: 'Playfair Display', serif;
-        }
-    </style>
-</head>
-
-<body class="min-h-screen text-slate-100">
+@extends('layout')
+@section('content')
     <div class="relative min-h-screen overflow-hidden">
         <div class="absolute inset-0 opacity-30">
             <div class="h-full w-full bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.06),_transparent_60%)]">
@@ -82,33 +56,4 @@
             </section>
         </main>
     </div>
-
-    <script src="conf.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const statusText = document.getElementById('pending-status');
-            const confirmButton = document.getElementById('confirm-button');
-            const cancelButton = document.getElementById('cancel-button');
-            const transactionId = "get is from query params";
-
-            if (confirmButton) {
-                confirmButton.addEventListener('click', () => checkStatus());
-            }
-
-            if (cancelButton) {
-                cancelButton.addEventListener('click', () => {
-                    window.location.href = 'index.html';
-                });
-            }
-
-            function checkStatus() {
-                // call api check status here
-
-            }
-
-            setInterval(checkStatus(), 1000);
-        });
-    </script>
-</body>
-
-</html>
+@endsection

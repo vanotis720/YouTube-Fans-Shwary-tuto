@@ -1,52 +1,19 @@
-<!DOCTYPE html>
-<html lang="fr">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Offrez un Sourire</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Space+Grotesk:wght@400;500;600&display=swap"
-        rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        body {
-            font-family: 'Space Grotesk', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-            background: radial-gradient(circle at top, rgba(255, 234, 210, 0.65), transparent 45%),
-                radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.45), transparent 35%),
-                #0f172a;
-        }
-
-        .title-font {
-            font-family: 'Playfair Display', serif;
-        }
-    </style>
-</head>
-
-<body class="min-h-screen text-slate-100">
+@extends('layout')
+@section('content')
     <header class="relative overflow-hidden">
         <div class="absolute inset-0 opacity-40">
             <div class="h-full w-full bg-[radial-gradient(circle_at_center,_rgba(255,140,0,0.15),_transparent_55%)]">
             </div>
         </div>
         <div class="relative mx-auto flex max-w-6xl flex-col gap-10 px-6 pb-20 pt-24">
-            <p class="text-sm uppercase tracking-[0.4em] text-amber-200">Vander Otis · Fans YouTube</p>
+            <p class="text-sm uppercase tracking-[0.4em] text-amber-200">Vander Otis · Fans Club YouTube</p>
             <h1 class="title-font text-4xl leading-tight text-white sm:text-5xl lg:text-6xl">Financez le prochain
                 tutoriel
                 et aidez-moi à créer un contenu plus audacieux.</h1>
             <p class="max-w-2xl text-lg text-slate-200">Chaque cadeau débloque des expériences, améliore la production
                 et ajoute de la profondeur au processus créatif. Choisissez un palier ou créez votre propre message de
-                soutien.</p>
-            <!-- <div class="flex flex-wrap gap-4">
-                <button
-                    class="rounded-full border border-amber-300 px-6 py-3 text-sm font-semibold uppercase tracking-wide text-amber-200 transition hover:bg-amber-300 hover:text-slate-900">See
-                    Perks</button>
-                <button
-                    class="rounded-full bg-white/10 px-6 py-3 text-sm font-semibold uppercase tracking-wide text-white backdrop-blur transition hover:bg-white hover:text-slate-900">Custom
-                    Gift</button>
-            </div> -->
+                soutien.
+            </p>
         </div>
     </header>
 
@@ -63,7 +30,7 @@
                     <li>✦ Mention pendant le live</li>
                     <li>✦ Notes en avant-première</li>
                 </ul>
-                <button onclick="chooseGiftTier(22000)"
+                <button
                     class="mt-10 w-full rounded-full bg-white/90 py-3 text-sm font-semibold text-slate-900 transition group-hover:bg-white">Choisir
                     ce palier</button>
             </article>
@@ -80,7 +47,7 @@
                     <li>✦ Mini vlog coulisses</li>
                     <li>✦ Demande de sujet prioritaire</li>
                 </ul>
-                <button onclick="chooseGiftTier(110000)"
+                <button
                     class="mt-10 w-full rounded-full bg-slate-900/90 py-3 text-sm font-semibold text-white transition group-hover:bg-slate-900">Choisir
                     ce palier</button>
             </article>
@@ -96,42 +63,53 @@
                     <li>✦ Appel de co-planification</li>
                     <li>✦ Fichiers de projet exclusifs</li>
                 </ul>
-                <button onclick="chooseGiftTier(22000)"
+                <button
                     class="mt-10 w-full rounded-full border border-white/40 py-3 text-sm font-semibold text-white transition group-hover:bg-white group-hover:text-slate-900">Choisir
                     ce palier</button>
             </article>
         </section>
 
-        <section class="hidden mt-20 gap-10" id="gift-form-section">
+        <section class="mt-20 gap-10" id="gift-form-section">
             <div
                 class="max-w-2xl mx-auto rounded-3xl border border-white/10 bg-white/5 p-8 shadow-2xl shadow-indigo-900/40">
                 <p class="text-xs uppercase tracking-[0.3em] text-amber-200">Cadeau personnalisé</p>
                 <h3 class="title-font mt-4 text-3xl text-white">Créez votre propre étincelle</h3>
                 <p class="mt-3 text-sm text-slate-200">Choisissez un montant, laissez un mot et dites-moi quelle
-                    expérience vous voulez voir.</p>
-                <div id="status-banner"
-                    class="mt-6 hidden rounded-2xl border border-white/10 bg-white/5 px-5 py-4 text-sm text-slate-200 shadow-inner shadow-black/20">
-                </div>
-                <form id="gift-form" class="mt-8 space-y-6">
+                    expérience vous voulez voir.
+                </p>
+
+                @if (session('error'))
+                    <div id="status-banner"
+                        class="mt-6 hidden rounded-2xl bg-accent-200 border border-white/10 px-5 py-4 text-sm text-red-500 shadow-inner shadow-black/20">
+                    </div>
+                @endif
+                @if (session('message'))
+                    <div id="status-banner"
+                        class="mt-6 hidden rounded-2xl bg-green-200 border border-white/10 px-5 py-4 text-sm text-green-500 shadow-inner shadow-black/20">
+                    </div>
+                @endif
+
+                <form id="gift-form" method="POST" action="#" class="mt-8 space-y-6">
                     <label class="flex flex-col gap-2 text-sm">
                         <span class="uppercase tracking-[0.2em] text-amber-100">Montant</span>
                         <div class="flex items-center gap-2 rounded-2xl border border-white/20 bg-white/10 px-4 py-3">
                             <span class="text-slate-300">CDF</span>
-                            <input id="gift-amount" type="number" min="10000" step="1000" value="22000"
+                            <input id="gift-amount" name="amount" type="number" min="10000" step="1000"
+                                value="22000"
                                 class="w-full bg-transparent text-white placeholder-slate-400 focus:outline-none"
                                 placeholder="22000">
                         </div>
                     </label>
                     <label class="flex flex-col gap-2 text-sm">
                         <span class="uppercase tracking-[0.2em] text-amber-100">Nom</span>
-                        <input id="supporter-name" type="text"
+                        <input id="supporter-name" name="name" type="text"
                             class="rounded-2xl border border-white/20 bg-white/10 px-4 py-3 text-white placeholder-slate-400 focus:outline-none"
                             placeholder="Votre nom de héros">
                     </label>
                     <label class="flex flex-col gap-2 text-sm">
                         <span class="uppercase tracking-[0.2em] text-amber-100">Numéro Mobile Money</span>
                         <div class="flex flex-col gap-3 sm:flex-row">
-                            <select id="country-code"
+                            <select id="country-code" name="country_code"
                                 class="w-full rounded-2xl border border-white/20 bg-white/10 px-4 py-3 text-sm text-white focus:outline-none sm:max-w-[200px]">
                                 <option value="DRC" data-dial="+243" data-currency="CDF">+243 · CDF (RDC)</option>
                                 <option value="KE" data-dial="+254" data-currency="KES">+254 · KES (Kenya)</option>
@@ -144,24 +122,15 @@
                     </label>
                     <label class="flex flex-col gap-2 text-sm">
                         <span class="uppercase tracking-[0.2em] text-amber-100">Message</span>
-                        <textarea id="supporter-message" rows="4"
+                        <textarea name="message" id="supporter-message" rows="4"
                             class="rounded-2xl border border-white/20 bg-white/10 px-4 py-3 text-white placeholder-slate-400 focus:outline-none"
                             placeholder="Que devrais-je créer ensuite ?"></textarea>
                     </label>
-                    <button type="button" id="gift-button"
+                    <button type="submit" id="gift-button"
                         class="w-full rounded-2xl bg-gradient-to-r from-amber-200 to-rose-200 py-4 text-sm font-semibold uppercase tracking-wide text-slate-900 shadow-lg shadow-rose-200/40 transition hover:translate-y-0.5">Envoyer
                         le cadeau</button>
                 </form>
             </div>
         </section>
     </main>
-
-    <footer
-        class="border-t border-white/10 bg-slate-950/60 py-10 text-center text-xs uppercase tracking-[0.3em] text-slate-400">
-        Créé avec gratitude et néons ✶</footer>
-
-    <script src="conf.js"></script>
-    <script src="script.js"></script>
-</body>
-
-</html>
+@endsection

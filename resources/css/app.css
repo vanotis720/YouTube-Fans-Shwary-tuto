@@ -1,0 +1,27 @@
+@import "tailwindcss";
+@source "../views";
+
+@theme {
+    --color-watercourse-50: #ebfef6;
+    --color-watercourse-100: #cefde8;
+    --color-watercourse-200: #a2f8d6;
+    --color-watercourse-300: #66efc2;
+    --color-watercourse-400: #29dea8;
+    --color-watercourse-500: #05c491;
+    --color-watercourse-600: #00a077;
+    --color-watercourse-700: #008062;
+    --color-watercourse-800: #006f57;
+    --color-watercourse-900: #015342;
+    --color-watercourse-950: #002f26;
+    --color-accent-50: #fff0f1;
+    --color-accent-100: #ffdcde;
+    --color-accent-200: #ffbfc2;
+    --color-accent-300: #ff9399;
+    --color-accent-400: #ff555e;
+    --color-accent-500: #ff212d;
+    --color-accent-600: #ff000e;
+    --color-accent-700: #d9000c;
+    --color-accent-800: #bb010b;
+    --color-accent-900: #930910;
+    --color-accent-950: #510004;
+}
