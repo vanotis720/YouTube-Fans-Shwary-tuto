@@ -85,5 +85,14 @@ class GatewayController extends Controller
     public function callbackHandler(Request $request)
     {
         Log::info('callback received', [$request->all()]);
+        $data = $request->all();
+
+        if (isset($data['status']) && $data['status'] === 'completed') {
+            // DB query to update payment status can be placed here
+            return redirect()->route('deposit.success', ['id' => $data['id']]);
+        }
+        if (isset($data['status']) && $data['status'] === 'failed') {
+            return redirect()->route('home')->with('error', 'Le paiement a échoué. Veuillez réessayer.');
+        }
     }
 }
